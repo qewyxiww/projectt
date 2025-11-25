@@ -11,6 +11,7 @@ import (
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("IndexHandler called!")
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
@@ -21,7 +22,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("Serving index.html...") // Добавьте эту строку
 	http.ServeFile(w, r, "index.html")
 }
 
@@ -37,7 +37,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	file, header, err := r.FormFile("file")
+	file, header, err := r.FormFile("myFile")
 	if err != nil {
 		http.Error(w, "Unable to get file from form", http.StatusInternalServerError)
 		return
